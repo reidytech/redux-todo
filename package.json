@@ -1,0 +1,19 @@
+{
+  "name": "redux-todo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Chris Reidy <reidy.data@gmail.com> (http://qigone.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "proptypes": "^1.1.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
+  }
+}
