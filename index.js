@@ -1,7 +1,35 @@
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import todoApp from './reducers'
+import App from './components/App'
 
 let store = createStore(todoApp)
+
+/* All container components need access to the Redux store so that
+they can subscribe to it. 
+
+One way would be to pass it as a prop to every container component,
+but that would be work, because you would have to wire store
+even through presentational components just because they
+happen to render a container deep in the component tree.
+
+A better option is to use React-Redux component <Provider> to
+make the store available to all container components in the 
+application without passing it explicitly. You only need to use
+it once when you render the root component.
+Learn about "context"? That's the link mentioned in
+---> <Provider>
+*/
+
+render(
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
+)
+
 
 /* Presentation:
 

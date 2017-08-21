@@ -34,17 +34,29 @@ Because import * is still new syntax, we don't use it anymore in the documentati
 
 */
 
+/*
+Took this import out - split up visibilityFilter and todos reducers
+
 import {
     ADD_TODO,
     TOGGLE_TODO,
+    REMOVE_TODO,
     SET_VISIBILITY_FILTER,
-    VisibilityFilters
+    VisibilityFilters,
+    addTodo,
+    toggleTodo,
+    setVisibilityFilter
   } from './actions'
 import { combineReducers } from 'redux'
 
 //uses es6 destructuring
 
 const {SHOW_ALL} = VisibilityFilters
+*/
+
+/* THIS IS WHAT IT WAS ->
+
+ie., the todos before it became its own file
 
 function todos(state = [], action) {
     switch (action.type) {
@@ -69,7 +81,48 @@ function todos(state = [], action) {
         return state
     }
   }
+
+  */
+
+  const todos = (state = [], action) => {
+    switch (action.type) {
+      case 'ADD_TODO':
+        return [
+          ...state,
+          {
+            id: action.id, //I believe this is what you were missing
+            text: action.text,
+            completed: false
+          }
+        ]
+      case 'TOGGLE_TODO':
+        return state.map(todo => 
+          (todo.id === action.id)
+            ? {...todo, completed: !todo.completed}
+              : todo
+          )
+      default:
+        return state
+    }
+  }
+
+  export default todos
+      /*
+      THIS CHANGED
+      case TOGGLE_TODO:
+        return state.map((todo, index) => {
+          if (index === action.index) {
+            return Object.assign({}, todo, {
+              completed: !todo.completed
+            })
+          }
+          return todo
+        })
+        */
+
   
+  /* moved this to visibilityFilter.js, apparently 
+
   function visibilityFilter(state = SHOW_ALL, action) {
     switch (action.type) {
       case SET_VISIBILITY_FILTER:
@@ -78,6 +131,7 @@ function todos(state = [], action) {
         return state
     }
   }
+*/
 
 /*
 
@@ -99,12 +153,14 @@ All combineReducers() does is generate a function that calls your reducers with 
 
 */
 
+/* NEED TO TAKE THIS OUT, IT IS NOW IN INDEX.jS 
   const todoApp = combineReducers({
     visibilityFilter,
     todos
   })
   
   export default todoApp
+  */
 
   /*
 
